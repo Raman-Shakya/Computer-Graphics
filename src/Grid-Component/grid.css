@@ -1,0 +1,18 @@
+.pixel-grid {
+    margin: 10px;
+}
+
+.pixel-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pixel {
+    width: 2em;
+    height: 2em;
+    border: 1px solid black;
+}
+.colored-pixel {
+    background: red;
+}
