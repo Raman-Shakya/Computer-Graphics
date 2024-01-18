@@ -8,11 +8,11 @@ function App() {
     <div className="App">
       <h1>DDA algorithm implementation</h1>
       <DDA
-        // width={20}
-        // height={10}
-        start={[1,2]}
+        width={20}
+        height={10}
+        // start={[1,2]}
         // end={[3,4]}
-        delay={10}
+        delay={100}
       />
     </div>
   );

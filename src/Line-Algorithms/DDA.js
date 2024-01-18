@@ -26,7 +26,7 @@ class DDA extends Grid {
 
         if (this.props.start) this.currentInputState = 1;
         else return;
-        
+
         this.setPixel(this.start[0], this.start[1]);
 
         if (!this.start || !this.end) return;
@@ -94,8 +94,8 @@ class DDA extends Grid {
     }
 
     computeNext() {
-        if (this.lineSettings.curX == this.lineSettings.endX ||
-            this.lineSettings.curY == this.lineSettings.endY
+        if (Math.round(this.lineSettings.curX) == this.lineSettings.endX &&
+            Math.round(this.lineSettings.curY) == this.lineSettings.endY
         ) {
             clearInterval(this.interval);
             return;
