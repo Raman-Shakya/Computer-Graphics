@@ -36,7 +36,7 @@ class Grid extends React.Component {
 
     setPixel(y, x) {    // return true if it changed false if it didn't do anything
         if (!this.state.grid) return false;
-        if (y>=this.state.grid.length || x >=this.state.grid[0].length) return false;
+        if (y<0 || x<0 || y>=this.state.grid[0].length || x >=this.state.grid.length) return false;
         if (this.state.grid[x][y]===1) return false;
         this.state.grid[x][y] = 1;
         
@@ -48,7 +48,7 @@ class Grid extends React.Component {
     
     unSetPixel(y, x) {    // return true if it changed false if it didn't do anything
         if (!this.state.grid) return false;
-        if (y>=this.state.grid.length || x >=this.state.grid[0].length) return false;
+        if (y<0 || x<0 || y>=this.state.grid[0].length || x >=this.state.grid.length) return false;
         if (this.state.grid[x][y]===0) return false;
         this.state.grid[x][y] = 0;
 
@@ -56,6 +56,15 @@ class Grid extends React.Component {
             grid: this.state.grid
         });
         return true;
+    }
+
+    clearGrid() {
+        for (let i=0; i<this.state.grid.length; i++) {
+            for (let j=0; j<this.state.grid[i].length; j++) {
+                this.state.grid[i][j] = 0;
+            }
+        }
+        this.setState({grid: this.state.grid});
     }
 
     inputFunc(y, x) {
