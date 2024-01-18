@@ -12,6 +12,7 @@
     width: 2em;
     height: 2em;
     border: 1px solid black;
+    transition: all 0.3s;
 }
 .colored-pixel {
     background: red;

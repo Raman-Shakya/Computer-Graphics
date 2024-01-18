@@ -34,18 +34,13 @@ class Grid extends React.Component {
     // }
 
     setPixel(x, y) {
-        if (this.state.grid[x][y]) this.state.grid[x][y] = 0;
-        else this.state.grid[x][y] = 1;
+        // if (this.state.grid[x][y]) this.state.grid[x][y] = 0;
+        this.state.grid[x][y] = 1;
 
         this.setState({
             grid: this.state.grid
         });
     }
-
-    unSetPixel(x, y) {
-        this.grid[x][y] = 0;
-    }
-
 
     render() {
         return <div className="pixel-grid">
@@ -53,7 +48,7 @@ class Grid extends React.Component {
                 this.state.grid.map((line, x)=>
                     <div className="pixel-line" key={x}>
                         {line.map((pixData, y)=>
-                            <div className={`pixel ${pixData>0?'colored-pixel':''}`} onClick={()=>this.setPixel(x,y)} key={y}></div>
+                            <div className={`pixel ${pixData>0?'colored-pixel':''}`} key={y}></div>
                         )}
                     </div>
                 )
