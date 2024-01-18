@@ -9,8 +9,8 @@ class DDA extends Grid {
     }
     
     componentDidMount() {
-        const start = [1,1];
-        const end = [6,7];
+        const start = this.props.start || [1,1];
+        const end = this.props.end || [6,5];
 
         this.initializeLineSettings(start, end);
         
@@ -20,18 +20,18 @@ class DDA extends Grid {
                 Math.round(this.lineSettings.curY)
             );
             this.computeNext();
-        }, 500);
+        }, this.props.delay || 500);
     }
 
     initializeLineSettings(start, end) {
-        this.lineSettings.endX = end[0];
-        this.lineSettings.endY = end[1];
+        this.lineSettings.endX = end[1];
+        this.lineSettings.endY = end[0];
 
-        this.lineSettings.curX = start[0];
-        this.lineSettings.curY = start[1];
+        this.lineSettings.curX = start[1];
+        this.lineSettings.curY = start[0];
 
-        this.lineSettings.dellX = end[0] - start[0];
-        this.lineSettings.dellY = end[1] - start[1];
+        this.lineSettings.dellX = end[1] - start[1];
+        this.lineSettings.dellY = end[0] - start[0];
         
         this.lineSettings.n = Math.max(this.lineSettings.dellX, this.lineSettings.dellY);
     }

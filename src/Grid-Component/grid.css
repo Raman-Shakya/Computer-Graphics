@@ -1,5 +1,18 @@
+:root {
+    --border-color: rgba(0, 0, 0, 0.374)
+}
+
 .pixel-grid {
-    margin: 10px;
+    border-radius: 40px;
+    background: white;
+    width: 60%;
+    box-sizing: border-box;
+}
+
+.pixel-grid-main {
+    margin: 10% auto;
+    width: 80%;
+    border: 1px solid var(--border-color);
 }
 
 .pixel-line {
@@ -9,11 +22,34 @@
 }
 
 .pixel {
-    width: 2em;
-    height: 2em;
-    border: 1px solid black;
+    position: relative;
+    display: flex;
+    aspect-ratio: 1/1;
+    flex: 1;
+    border: 1px solid var(--border-color);
     transition: all 0.3s;
 }
+.pixel:hover {
+    background: rgb(219, 148, 148);
+}
 .colored-pixel {
-    background: red;
+    background: rgba(255, 0, 0, 0.815) !important;
+}
+
+/* labels */
+.pixel > p { 
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 1em;
+}
+.pixel-x-label {
+    right: 100%;
+}
+.pixel-y-label {
+    bottom: 100%;
 }

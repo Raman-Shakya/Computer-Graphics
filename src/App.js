@@ -7,7 +7,13 @@ function App() {
   return (
     <div className="App">
       <h1>DDA algorithm implementation</h1>
-      <DDA></DDA>
+      <DDA
+        width={20}
+        height={10}
+        start={[4,5]}
+        end={[1,9]}
+        delay={500}
+      />
     </div>
   );
 }
