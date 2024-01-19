@@ -1,11 +1,11 @@
-import Grid from "../Grid-Component/gridClass";
+import Grid, { GridTableComponent } from "../Grid-Component/gridClass";
+import './DDA.css'
 
 class DDA extends Grid {
     constructor(props) {
         super(props);
         this.interval = null;
         this.position = [0,0];
-        this.lineSettings = {}
 
         this.start = [];
         this.end = [];
@@ -21,6 +21,8 @@ class DDA extends Grid {
     
     // run this function after grid has rendered
     componentDidMount() {
+        this.setState({lineSettings: {}})
+
         this.start = this.props.start;
         this.end = this.props.end;
 
@@ -40,6 +42,8 @@ class DDA extends Grid {
     }
 
     inputFunc(y, x) {
+        if (!this.state.acceptInput) return;
+
         if (this.currentInputState===2) {
             clearInterval(this.interval);
             this.clearGrid();
@@ -66,21 +70,26 @@ class DDA extends Grid {
     }
     
     startAnimation() {
+        // empty the previous state
+        this.setState({
+            steps: []
+        })
         this.interval = setInterval(() => {
             this.setPixel(
-                Math.round(this.lineSettings.curX),
-                Math.round(this.lineSettings.curY)
+                Math.round(this.state.lineSettings.curX),
+                Math.round(this.state.lineSettings.curY)
             );
             this.computeNext();
         }, this.props.delay || 500);    
     }
 
     initializeLineSettings(start, end) {
-        this.lineSettings.endX = end[0];
-        this.lineSettings.endY = end[1];
+        this.state.lineSettings = {};
+        this.state.lineSettings.endX = end[0];
+        this.state.lineSettings.endY = end[1];
 
-        this.lineSettings.curX = start[0];
-        this.lineSettings.curY = start[1];
+        this.state.lineSettings.curX = start[0];
+        this.state.lineSettings.curY = start[1];
 
         const dellX = end[0] - start[0];
         const dellY = end[1] - start[1];
@@ -89,28 +98,94 @@ class DDA extends Grid {
         if (Math.abs(dellX) > Math.abs(dellY)) n = Math.abs(dellX);
         else n = Math.abs(dellY);
 
-        this.lineSettings.incX = dellX / n;
-        this.lineSettings.incY = dellY / n;       
+        this.state.lineSettings.incX = dellX / n;
+        this.state.lineSettings.incY = dellY / n;   
+        
+        this.setState({
+            lineSettings: this.state.lineSettings,
+            start: start,
+            end: end,
+            dellX: dellX,
+            dellY: dellY,
+        });
     }
 
     computeNext() {
-        if (Math.round(this.lineSettings.curX) == this.lineSettings.endX &&
-            Math.round(this.lineSettings.curY) == this.lineSettings.endY
+        if (Math.round(this.state.lineSettings.curX) == this.state.lineSettings.endX &&
+            Math.round(this.state.lineSettings.curY) == this.state.lineSettings.endY
         ) {
             clearInterval(this.interval);
             return;
         }
-        this.lineSettings.curX += this.lineSettings.incX;
-        this.lineSettings.curY += this.lineSettings.incY;
-    }
+        if (!this.state.steps) {
+            this.state.steps = [[0, this.state.lineSettings.curX, this.state.lineSettings.curY, '-', '-']];
+        }
+        else {
+            this.state.steps.push([
+                this.state.lineSettings.curX.toFixed(2), this.state.lineSettings.curY.toFixed(2),
+                (this.state.lineSettings.curX + this.state.lineSettings.incX).toFixed(2),
+                (this.state.lineSettings.curY + this.state.lineSettings.incY).toFixed(2),
+            ])
+        }
+        
+        this.setState({
+            steps: this.state.steps
+        });
 
-    checkInBetween(a, b, x) {
-        if (x>Math.max(a,b) || x<Math.min(a,b)) return false;
-        return true;
+        this.state.lineSettings.curX += this.state.lineSettings.incX;
+        this.state.lineSettings.curY += this.state.lineSettings.incY;
+
+
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
+    }
+
+
+    render() {
+        return <div className="pixel-grid">
+            <GridTableComponent state={this.state}/>
+            {
+                this.state.lineSettings && this.state.start && 
+                <div className="dda-description">
+                    <h2>Given,</h2>
+                    <p>Start = ({ this.state.start.join(', ') })</p>
+                    <p>End   = ({ this.state.end.join(', ') })</p>
+                    <h2>Now,</h2>
+                    <p>ΔX = {this.state.dellX}</p>
+                    <p>ΔY = {this.state.dellY}</p>
+                    <h2>And,</h2>
+                    <p>X<sub>inc</sub> = {this.state.lineSettings.incX.toFixed(2)}</p>
+                    <p>Y<sub>inc</sub> = {this.state.lineSettings.incY.toFixed(2)}</p>
+
+                    <h2>Steps in a table</h2>
+                    <div className="step-table-wrapper">
+                        <table className="step-table" cellSpacing={0}>
+                            <thead>
+                                <tr>
+                                    <th>step</th>
+                                    <th>X<sub>n</sub></th>
+                                    <th>Y<sub>n</sub></th>
+                                    <th>X<sub>n+1</sub></th>
+                                    <th>Y<sub>n+1</sub></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                { this.state.steps && this.state.steps.map((steps, index)=> 
+                                    <tr key={index}>
+                                        <td>{index}</td>
+                                        { steps.map((step, ind)=> 
+                                            <td key={ind}>{step}</td>
+                                        )}
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
     }
 }
 

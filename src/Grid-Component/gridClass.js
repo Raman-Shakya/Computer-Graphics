@@ -16,23 +16,17 @@ class Grid extends React.Component {
             temp.push(tempLine);
         }
 
+        this.inputFunc = this.inputFunc.bind(this);
+
         this.state = {
             grid: temp,
-            acceptInput: true,
+            acceptInput: this.props.acceptInput && true,
+            inputFunc: this.inputFunc,
+            steps: [],
         };
 
+
     }
-    
-    // initializeGrid() {
-    //     console.log("initializing grid");
-    //     const temp = [
-    //         [1,2,3],
-    //         [3,5,5]
-    //     ]
-    //     this.setState(
-    //         {grid: temp}
-    //     )
-    // }
 
     setPixel(y, x) {    // return true if it changed false if it didn't do anything
         if (!this.state.grid) return false;
@@ -73,32 +67,31 @@ class Grid extends React.Component {
             this.unSetPixel(x, y);
         }
     }
-
-    render() {
-        return <div className="pixel-grid">
-            <div className="pixel-grid-main">
-                {   this.state.grid && 
-                    this.state.grid.map((line, x)=>
-                        <div className="pixel-line" key={x}>
-                            {line.map((pixData, y)=>
-                                <div
-                                    className={`pixel ${pixData>0?'colored-pixel':''}`}
-                                    key={y}
-                                    onClick={()=>this.state.acceptInput && this.inputFunc(x, y)}
-                                >
-                                    {y==0 && <p className="pixel-x-label">{x}</p>}     
-                                    {x==0 && <p className="pixel-y-label">{y}</p>}     
-                                </div>
-                            )}
-                        </div>
-                    )
-                }
-            </div>
-        </div>
-    }
-    
-
 }
 
 
+class GridTableComponent extends React.Component {
+    render() {
+        return <div className="pixel-grid-main">
+            {   this.props.state.grid && 
+                this.props.state.grid.map((line, x)=>
+                    <div className="pixel-line" key={x}>
+                        {line.map((pixData, y)=>
+                            <div
+                                className={`pixel ${pixData>0?'colored-pixel':''}`}
+                                key={y}
+                                onClick={()=>this.props.state.acceptInput && this.props.state.inputFunc(x, y)}
+                            >
+                                {y==0 && <p className="pixel-x-label">{x}</p>}     
+                                {x==0 && <p className="pixel-y-label">{y}</p>}     
+                            </div>
+                        )}
+                    </div>
+                )
+            }
+        </div>
+    }
+}
+
+export { GridTableComponent };
 export default Grid;

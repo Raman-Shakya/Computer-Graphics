@@ -6,6 +6,7 @@
 
 :root {
   --background-color: rgb(230, 210, 210);
+  --border-color: rgba(0, 0, 0, 0.374)
 }
 
 #root {
@@ -17,9 +18,8 @@
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding: 4em;
   align-items: center;
-  min-height: 100vh;
   text-align: center;
   gap: 2em;
 }

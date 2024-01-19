@@ -1,16 +1,13 @@
-:root {
-    --border-color: rgba(0, 0, 0, 0.374)
-}
-
 .pixel-grid {
     border-radius: 40px;
     background: white;
     width: 60%;
     box-sizing: border-box;
+    padding: 3em 0;
 }
 
 .pixel-grid-main {
-    margin: 10% auto;
+    margin: 2em auto 1em;
     width: 80%;
     border: 1px solid var(--border-color);
 }

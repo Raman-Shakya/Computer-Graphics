@@ -13,6 +13,7 @@ function App() {
         // start={[1,2]}
         // end={[3,4]}
         delay={100}
+        acceptInput={true}
       />
     </div>
   );
