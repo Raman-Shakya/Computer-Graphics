@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <h1>DDA algorithm implementation</h1>
-      <BLA
+      <DDA
         width={20}
         height={10}
         // start={[1,2]}
