@@ -1,13 +1,13 @@
-.dda-description {
+.description {
     width: 80%;
     text-align: left;
     margin: 1em auto;
     box-sizing: border-box;
 }
-.dda-description p {
+.description p {
     margin-left: 1em
 }
-.dda-description h2 {
+.description h2 {
     font-size: 1.1em;
     margin: 0.7em auto 0.3em;
 }

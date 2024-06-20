@@ -37,7 +37,7 @@ class DDA extends Grid {
         this.initializeLineSettings(this.start, this.end);
         
         if (this.props.start && this.props.end) {
-            this.startAnimation();
+            // this.startAnimation();
         }
     }
 
@@ -62,8 +62,16 @@ class DDA extends Grid {
             this.currentInputState = 2;
             this.end = [x, y];
 
-            this.initializeLineSettings(this.start, this.end);
-            this.startAnimation();
+            if (this.initializeLineSettings(this.start, this.end)) {
+                this.startAnimation();
+            }
+            else {
+                this.state.start = null;
+                this.state.end = null;
+                this.currentInputState = 0;
+                this.clearGrid();
+            }
+
             return;
         }
         
@@ -108,11 +116,13 @@ class DDA extends Grid {
             dellX: dellX,
             dellY: dellY,
         });
+
+        return true;
     }
 
     computeNext() {
-        if (Math.round(this.state.lineSettings.curX) == this.state.lineSettings.endX &&
-            Math.round(this.state.lineSettings.curY) == this.state.lineSettings.endY
+        if (Math.round(this.state.lineSettings.curX) === this.state.lineSettings.endX &&
+            Math.round(this.state.lineSettings.curY) === this.state.lineSettings.endY
         ) {
             clearInterval(this.interval);
             return;
@@ -144,48 +154,50 @@ class DDA extends Grid {
 
 
     render() {
-        return <div className="pixel-grid">
-            <GridTableComponent state={this.state}/>
-            {
-                this.state.lineSettings && this.state.start && 
-                <div className="dda-description">
-                    <h2>Given,</h2>
-                    <p>Start = ({ this.state.start.join(', ') })</p>
-                    <p>End   = ({ this.state.end.join(', ') })</p>
-                    <h2>Now,</h2>
-                    <p>ΔX = {this.state.dellX}</p>
-                    <p>ΔY = {this.state.dellY}</p>
-                    <h2>And,</h2>
-                    <p>X<sub>inc</sub> = {this.state.lineSettings.incX.toFixed(2)}</p>
-                    <p>Y<sub>inc</sub> = {this.state.lineSettings.incY.toFixed(2)}</p>
+        return <>
+            <h1>DDA algorithm implementation</h1>
+            <GridTableComponent state={this.state}>
+                {
+                    this.state.lineSettings && this.state.start && 
+                    <div className="description">
+                        <h2>Given,</h2>
+                        <p>Start = ({ this.state.start.join(', ') })</p>
+                        <p>End   = ({ this.state.end.join(', ') })</p>
+                        <h2>Now,</h2>
+                        <p>ΔX = {this.state.dellX}</p>
+                        <p>ΔY = {this.state.dellY}</p>
+                        <h2>And,</h2>
+                        <p>X<sub>inc</sub> = {this.state.lineSettings.incX.toFixed(2)}</p>
+                        <p>Y<sub>inc</sub> = {this.state.lineSettings.incY.toFixed(2)}</p>
 
-                    <h2>Steps in a table</h2>
-                    <div className="step-table-wrapper">
-                        <table className="step-table" cellSpacing={0}>
-                            <thead>
-                                <tr>
-                                    <th>step</th>
-                                    <th>X<sub>n</sub></th>
-                                    <th>Y<sub>n</sub></th>
-                                    <th>X<sub>n+1</sub></th>
-                                    <th>Y<sub>n+1</sub></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                { this.state.steps && this.state.steps.map((steps, index)=> 
-                                    <tr key={index}>
-                                        <td>{index}</td>
-                                        { steps.map((step, ind)=> 
-                                            <td key={ind}>{step}</td>
-                                        )}
+                        <h2>Steps in a table</h2>
+                        <div className="step-table-wrapper">
+                            <table className="step-table" cellSpacing={0}>
+                                <thead>
+                                    <tr>
+                                        <th>step</th>
+                                        <th>X<sub>n</sub></th>
+                                        <th>Y<sub>n</sub></th>
+                                        <th>X<sub>n+1</sub></th>
+                                        <th>Y<sub>n+1</sub></th>
                                     </tr>
-                                )}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    { this.state.steps && this.state.steps.map((steps, index)=> 
+                                        <tr key={index}>
+                                            <td>{index}</td>
+                                            { steps.map((step, ind)=> 
+                                                <td key={ind}>{step}</td>
+                                            )}
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+            </GridTableComponent>
+        </>
     }
 }
 

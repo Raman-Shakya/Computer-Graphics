@@ -62,7 +62,7 @@ class Grid extends React.Component {
     }
 
     inputFunc(y, x) {
-        console.log("overwrite inputFunc method to use this feature");
+        // overwrite inputFunc method to use this feature
         if (!this.setPixel(x, y)) {
             this.unSetPixel(x, y);
         }
@@ -72,23 +72,26 @@ class Grid extends React.Component {
 
 class GridTableComponent extends React.Component {
     render() {
-        return <div className="pixel-grid-main">
-            {   this.props.state.grid && 
-                this.props.state.grid.map((line, x)=>
-                    <div className="pixel-line" key={x}>
-                        {line.map((pixData, y)=>
-                            <div
+        return <div className="pixel-grid" >
+            <div className="pixel-grid-main">
+                {   this.props.state.grid && 
+                    this.props.state.grid.map((line, x)=>
+                        <div className="pixel-line" key={x}>
+                            {line.map((pixData, y)=>
+                                <div
                                 className={`pixel ${pixData>0?'colored-pixel':''}`}
                                 key={y}
                                 onClick={()=>this.props.state.acceptInput && this.props.state.inputFunc(x, y)}
-                            >
-                                {y==0 && <p className="pixel-x-label">{x}</p>}     
-                                {x==0 && <p className="pixel-y-label">{y}</p>}     
-                            </div>
-                        )}
-                    </div>
-                )
-            }
+                                >
+                                    {y===0 && <p className="pixel-x-label">{x}</p>}     
+                                    {x===0 && <p className="pixel-y-label">{y}</p>}     
+                                </div>
+                            )}
+                        </div>
+                    )
+                }
+            </div>
+            { this.props.children }
         </div>
     }
 }

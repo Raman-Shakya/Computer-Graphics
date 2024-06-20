@@ -50,3 +50,10 @@
 .pixel-y-label {
     bottom: 100%;
 }
+
+
+@media (max-width: 767px) {
+    .pixel-grid {
+        width: 90%;
+    }
+}
