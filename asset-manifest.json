@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/ComputerGraphics/static/css/main.cfebee9f.css",
-    "main.js": "/ComputerGraphics/static/js/main.fe9d6527.js",
+    "main.css": "/ComputerGraphics/static/css/main.678ca60a.css",
+    "main.js": "/ComputerGraphics/static/js/main.e2274650.js",
     "static/js/787.8e2a27b5.chunk.js": "/ComputerGraphics/static/js/787.8e2a27b5.chunk.js",
-    "static/media/logo.svg": "/ComputerGraphics/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/ComputerGraphics/index.html",
-    "main.cfebee9f.css.map": "/ComputerGraphics/static/css/main.cfebee9f.css.map",
-    "main.fe9d6527.js.map": "/ComputerGraphics/static/js/main.fe9d6527.js.map",
+    "main.678ca60a.css.map": "/ComputerGraphics/static/css/main.678ca60a.css.map",
+    "main.e2274650.js.map": "/ComputerGraphics/static/js/main.e2274650.js.map",
     "787.8e2a27b5.chunk.js.map": "/ComputerGraphics/static/js/787.8e2a27b5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cfebee9f.css",
-    "static/js/main.fe9d6527.js"
+    "static/css/main.678ca60a.css",
+    "static/js/main.e2274650.js"
   ]
 }
