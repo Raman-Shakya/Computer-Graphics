@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ComputerGraphics/static/css/main.678ca60a.css",
-    "main.js": "/ComputerGraphics/static/js/main.e2274650.js",
-    "static/js/787.8e2a27b5.chunk.js": "/ComputerGraphics/static/js/787.8e2a27b5.chunk.js",
-    "index.html": "/ComputerGraphics/index.html",
-    "main.678ca60a.css.map": "/ComputerGraphics/static/css/main.678ca60a.css.map",
-    "main.e2274650.js.map": "/ComputerGraphics/static/js/main.e2274650.js.map",
-    "787.8e2a27b5.chunk.js.map": "/ComputerGraphics/static/js/787.8e2a27b5.chunk.js.map"
+    "main.css": "/Computer-Graphics/static/css/main.69b18b9b.css",
+    "main.js": "/Computer-Graphics/static/js/main.3be238fe.js",
+    "static/js/787.8e2a27b5.chunk.js": "/Computer-Graphics/static/js/787.8e2a27b5.chunk.js",
+    "index.html": "/Computer-Graphics/index.html",
+    "main.69b18b9b.css.map": "/Computer-Graphics/static/css/main.69b18b9b.css.map",
+    "main.3be238fe.js.map": "/Computer-Graphics/static/js/main.3be238fe.js.map",
+    "787.8e2a27b5.chunk.js.map": "/Computer-Graphics/static/js/787.8e2a27b5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.678ca60a.css",
-    "static/js/main.e2274650.js"
+    "static/css/main.69b18b9b.css",
+    "static/js/main.3be238fe.js"
   ]
 }
